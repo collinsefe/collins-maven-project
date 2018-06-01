@@ -24,7 +24,7 @@ data "template_file" "ecs_jenkins_policy" {
   template = "${file("policies/ecs_policy.json")}"
 }
 
-
+/*
 # -------------------
 # Jenkins ECS Cluster
 # -------------------
@@ -50,7 +50,7 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
 }
   
 
-  /*<<EOF
+<<EOF
 [
   {
     "name": "${var.ecs_task_family}",
@@ -101,35 +101,35 @@ resource "aws_security_group" "jenkins_sg" {
   ingress {
     from_port   = "80"
     to_port     = "80"
-    cidr_blocks = ["10.0.0.0/8"]
+    cidr_blocks = ["0.0.0.0"]
     protocol    = "tcp"
   }
 
   ingress {
     from_port   = "8080"
     to_port     = "8080"
-    cidr_blocks = ["10.0.0.0/8"]
+    cidr_blocks = ["0.0.0.0"]
     protocol    = "tcp"
   }
 
   ingress {
     from_port   = "50000"
     to_port     = "50000"
-    cidr_blocks = ["10.0.0.0/8"]
+    cidr_blocks = ["0.0.0.0"]
     protocol    = "tcp"
   }
 
   ingress {
     from_port   = "22"
     to_port     = "22"
-    cidr_blocks = ["10.0.0.0/8"]
+    cidr_blocks = ["10.0.0.0"]
     protocol    = "tcp"
   }
 
   ingress {
     from_port   = "443"
     to_port     = "443"
-    cidr_blocks = ["10.0.0.0/8"]
+    cidr_blocks = ["0.0.0.0"]
     protocol    = "tcp"
   }
 
@@ -147,7 +147,7 @@ resource "aws_security_group" "jenkins_sg" {
   tags {
     Name        = "jenkins-sg"
     Author      = "corighose"
-    Environment = "dev"
+    Project    = "maven"
   }
 }
 
@@ -179,7 +179,7 @@ resource "aws_instance" "jenkins_server" {
   tags {
     Name                   = "jenkins-server"
     Author                 = "corighose"
-    Environment            = "dev"
+    Project            = "maven"
     Termination_protection = "false"
   }
 }
@@ -191,6 +191,7 @@ module "jenkins_ec2_instance" {
   source = "modules/ec2-profile"
 }
 
+/*
 #############
 # LOAD BALANCER 
 #############
@@ -207,6 +208,7 @@ module "jenkins_elb" {
 
   elb_cookie_expiration_period = "${var.jenkins_elb_cookie_expiration_period}"
 }
+*/
 
 ###############
 # S3 BUCKET
@@ -300,6 +302,7 @@ EOF
 }
 */
 
+/*
 ########################
 # Jenkins ECS Service
 ########################
@@ -396,7 +399,7 @@ resource "aws_launch_configuration" "jenkins_lc" {
   ephemeral_block_device      = "${var.ephemeral_block_device}"
   root_block_device           = "${var.root_block_device}"
 */
-
+/*
   associate_public_ip_address = false
 
   #load_balancers = ["${module.jenkins_elb.jenkins_elb_id}"]
@@ -535,3 +538,5 @@ module "jenkins_scale_down_alarm" {
   evaluation_periods  = "${var.scale_down_alarm_evaluation_periods}"
   treat_missing_data  = "${var.scale_down_alarm_treat_missing_data}"
 }
+
+*/

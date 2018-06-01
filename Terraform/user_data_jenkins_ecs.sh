@@ -20,7 +20,7 @@ sudo unzip terraform_0.9.8_linux_amd64.zip
 sudo mv terraform /usr/local/bin/
 sudo yum update -y aws-cli
 sudo yum install git vim nano -y
-
+/*
 # Install NFS client required packages
 echo "Installing NFS client required packages"
 yum -y install nfs-utils bind-utils
@@ -60,6 +60,7 @@ else
   echo "${efs_filesystem_id}.efs.${aws_region}.amazonaws.com:/ ${efs_mountpoint} nfs4 nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 0 0" >> /etc/fstab
 fi
 
+
 # Add instance to the ECS cluster
 echo "Adding instance to the ECS cluster"
 #echo ECS_CLUSTER='${ecs_cluster_name}' >> /etc/ecs/ecs.config
@@ -72,3 +73,4 @@ echo "Restarting ECS and Docker"
 #sudo service docker restart
 #sudo start ecs
 
+*/
